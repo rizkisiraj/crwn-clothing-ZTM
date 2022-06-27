@@ -1,9 +1,10 @@
 
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.util";
 import { FormInput } from "../form-input/form-input.component";
 import { Button } from "../button/button.component";
+import { UserContext } from "../../contexts/user.context";
 import './sign-up.styles.scss'
 
 const defaultConstructor = {
@@ -26,7 +27,9 @@ const SignUp = () => {
         }
 
         createAuthUserWithEmailAndPassword(email,password)
-        .then(({ user })  => createUserDocumentFromAuth(user,{ displayName }))
+        .then(({ user })  => {
+            createUserDocumentFromAuth(user,{ displayName })
+            })
         .catch(error => {
             if(error.code === "auth/email-already-in-use") alert("Email sudah ada");
             console.log(error.code)});
