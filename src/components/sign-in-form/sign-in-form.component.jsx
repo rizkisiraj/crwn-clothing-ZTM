@@ -74,7 +74,7 @@ export const SignInForm = () => {
             />
 
             <div className="buttons-container">
-            <Button type="submit" buttonType="inverted">Sign In</Button>
+            <Button type="submit" buttonType="base">Sign In</Button>
             <Button onClick={logGoogleUser} type="button" buttonType="google">Google Sign In</Button>
             </div> 
             </form>

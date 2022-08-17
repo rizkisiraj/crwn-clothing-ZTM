@@ -3,5 +3,9 @@
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
     row-gap: 50px;
-    padding: 0 3rem;
-}
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    text-transform: capitalize;
+  }
