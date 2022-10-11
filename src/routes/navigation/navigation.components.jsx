@@ -1,19 +1,15 @@
-import { Outlet, Link } from "react-router-dom"
-import { Fragment, useContext } from "react";
+import { Outlet } from "react-router-dom";
+import { Fragment } from "react";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.util";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { LogoContainer, NavigationContainer, NavLink, NavLinks } from "./navigation.styles";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../stores/user/user.selector";
 
 const Navigation = () => {
-  const { currentUser,setCurrentUser } = useContext(UserContext);
-
-  const resetUser = () => {
-    signOutUser().then(setCurrentUser(null));
-  }
-
+  const currentUser = useSelector(userSelector);
     return (
       <Fragment>
         <NavigationContainer as='nav'>
@@ -25,7 +21,7 @@ const Navigation = () => {
             SHOP
             </NavLink>
             {currentUser ? 
-            <NavLink as='span' onClick={resetUser}>SIGN-OUT</NavLink> 
+            <NavLink as='span' onClick={signOutUser}>SIGN-OUT</NavLink> 
             :
             <NavLink to='/auth'>
             SIGN IN

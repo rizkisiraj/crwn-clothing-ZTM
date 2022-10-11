@@ -50,16 +50,18 @@ const firebaseConfig = {
   export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
+  
+    const querySnapshot = await getDocs(q);
 
-    const querySnapshot = await getDocs(q)
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-      const { title, items } = docSnapshot.data();
-      acc[title.toLowerCase()] = items;
-      return acc;
-    }, {});
-
-    return categoryMap;
-  }
+    return querySnapshot.docs.map((doc) => doc.data());
+    // const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    //   const { title, items } = docSnapshot.data();
+    //   acc[title.toLowerCase()] = items;
+    //   return acc;
+    // }, {});
+  
+    // return categoryMap;
+  };
 
   export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
@@ -69,7 +71,6 @@ const firebaseConfig = {
     console.log(userDocRef);
 
     const userSnapshot = await getDoc(userDocRef);
-
     if(!userSnapshot.exists()) {
       const { displayName, email } = userAuth;
       const createdAt = new Date();
@@ -88,8 +89,6 @@ const firebaseConfig = {
       console.log(userSnapshot.data());
     }
     return userDocRef;
-
-
   }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
