@@ -7,6 +7,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { LogoContainer, NavigationContainer, NavLink, NavLinks } from "./navigation.styles";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../stores/user/user.selector";
+import { selectIsCartOpen } from "../../stores/cart/cart.selector";
 
 const Navigation = () => {
   const currentUser = useSelector(userSelector);
